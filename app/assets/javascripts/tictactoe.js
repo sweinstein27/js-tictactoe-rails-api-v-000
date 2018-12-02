@@ -18,6 +18,22 @@ function updateState(square) {
   $(square).text(token);
 }
 
-function setMessage(string){
+function setMessage(string) {
   $('#message').text(string);
+}
+
+function checkWinner() {
+  var board = {};
+  var winner = false;
+
+  $('td').text((index, square) => board[index] = square);
+
+  WINNING_COMBOS.some(function(combo) {
+    if (board[combo[0]] !== "" && board[combo[0]] === board[combo[1]] && board[combo[1]] === board[combo[2]]) {
+      setMessage(`Player ${board[combo[0]]} Won!`);
+      return winner = true;
+    }
+  });
+
+  return winner;
 }
